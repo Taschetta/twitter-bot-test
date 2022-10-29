@@ -28,6 +28,7 @@ const stream = await twitter_read.v2.searchStream({ autoConnect: true })
 stream.on(ETwitterStreamEvent.Connected, () => console.log('Stream is started.'));
 
 stream.on(ETwitterStreamEvent.Data, (tweet) => {
+  console.log(tweet)
   twitter_write.v2.retweet(USER_ID, tweet.data.id)
     .then(console.log)
     .catch(console.log)
@@ -35,7 +36,14 @@ stream.on(ETwitterStreamEvent.Data, (tweet) => {
 
 stream.on(ETwitterStreamEvent.ConnectionError, console.log)
 
-await stream.connect()
+
+try {
+  await stream.connect()  
+} catch (error) {
+  await stream.close()
+}
+
+// await stream.connect()
 
 // const response = await twitter.v2.searchStream({ })
 // const tweets = response.data.data
