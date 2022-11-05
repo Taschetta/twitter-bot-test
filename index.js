@@ -8,6 +8,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const USER_ID = process.env.USER_ID
+const STREAM_RULE_ID = process.env.STREAM_RULE_ID
 
 const twitter_write = (new TwitterApi({
   appKey: API_KEY,
@@ -20,8 +21,12 @@ const twitter_write = (new TwitterApi({
 
 const twitter_read = (new TwitterApi(BEARER_TOKEN)).readWrite
 
+// UNO
+
 // console.log(await twitter.v2.updateStreamRules({ delete: { ids: [STREAM_RULE_ID] } }))
-// console.log(await twitter.v2.updateStreamRules({ add: [{ value: '#pruebadebotdetwitter' }] }))
+// console.log(await twitter_read.v2.updateStreamRules({ add: [{ value: '#visitelabiblioameghino' }] }))
+
+// DOS
 
 const stream = await twitter_read.v2.searchStream({ autoConnect: true })
 
@@ -36,19 +41,8 @@ stream.on(ETwitterStreamEvent.Data, (tweet) => {
 
 stream.on(ETwitterStreamEvent.ConnectionError, console.log)
 
-
 try {
   await stream.connect()  
 } catch (error) {
   await stream.close()
 }
-
-// await stream.connect()
-
-// const response = await twitter.v2.searchStream({ })
-// const tweets = response.data.data
-
-// for await (const tweet of tweets) {
-  // const retweeet_response = await twitter.v2.retweet(USER_ID, tweet.id)
-  // console.log(retweeet_response)
-// }
