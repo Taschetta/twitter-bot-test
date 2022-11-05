@@ -44,5 +44,6 @@ stream.on(ETwitterStreamEvent.ConnectionError, console.log)
 try {
   await stream.connect()  
 } catch (error) {
+  console.log(error)
   await stream.close()
 }
