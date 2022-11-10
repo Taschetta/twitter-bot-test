@@ -7,6 +7,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const USER_ID = process.env.USER_ID
+const HASHTAG = `#${process.env.HASHTAG}`
 const INTERVAL_MS = parseInt(process.env.INTERVAL_MS)
 
 const twitter = (new TwitterApi({
@@ -21,7 +22,7 @@ const twitter = (new TwitterApi({
 
 setInterval(async () => {
   const start_time = new Date(Date.now() - INTERVAL_MS).toISOString()
-  const tweets = await twitter.v2.search('#visitelabiblioameghino', { start_time })
+  const tweets = await twitter.v2.search(HASHTAG, { start_time })
  
   for (const tweet of tweets) {
     console.log(tweet)
