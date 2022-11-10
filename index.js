@@ -26,8 +26,6 @@ setInterval(async () => {
   const start_time = new Date(Date.now() - INTERVAL_MS).toISOString()
   const tweets = await twitter.v2.search(HASHTAG, { start_time })
 
-  console.log('tweets', tweets)
- 
   for (const tweet of tweets) {
     console.log('tweet', tweet)
     twitter.v2.retweet(USER_ID, tweet.data.id)
