@@ -28,7 +28,7 @@ setInterval(async () => {
 
   for (const tweet of tweets) {
     console.log('tweet', tweet)
-    twitter.v2.retweet(USER_ID, tweet.data.id)
+    twitter.v2.retweet(USER_ID, tweet.id)
   }
 
   console.log('ending run')
